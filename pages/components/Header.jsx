@@ -1,6 +1,7 @@
 import React from 'react'
 import { ConnectWallet } from "@thirdweb-dev/react";
-
+// import complaint from './contracts/Complaint.json';
+// import contract from './components/contract';
 const Header = () => {
     return (
         <div className='header-container'>

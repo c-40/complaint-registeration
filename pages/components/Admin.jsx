@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { useContract, useContractRead, useContractWrite } from "@thirdweb-dev/react";
-
+// import complaint from './contracts/Complaint.json';
+// import contract from './contract';
 const Getter = () => {
-    const [id, setId] = useState(0);
-    const [rId, setRId] = useState(0);
-    const [aRemark, setARemark] = useState("");
-    const [rRemark, setRRemark] = useState("");
+    const [_id, setId] = useState(0);
+    const [_rId, setRId] = useState(0);
+    const [_aRemark, setARemark] = useState("");
+    const [_rRemark, setRRemark] = useState("");
     const { contract } = useContract(process.env.NEXT_PUBLIC_SMART_CONTRACT);
+    // const { contract } = useContract("0x28a7f19059CFbC7f9b3d3Dc459Dd5797CaB7e207");
     const { data: nextId } = useContractRead(contract, "nextId")
+    
     const { data: pendingApprovals } = useContractRead(contract, "pendingApprovals", 0)
     const { data: pendingResolutions } = useContractRead(contract, "pendingResolutions", 0)
     const { mutateAsync: calcPendingApprovalIds } = useContractWrite(contract, "calcPendingApprovalIds")
@@ -16,7 +19,7 @@ const Getter = () => {
     const { mutateAsync: approveComplaint } = useContractWrite(contract, "approveComplaint")
     const { mutateAsync: resolveComplaint } = useContractWrite(contract, "resolveComplaint")
     const { mutateAsync: discardComplaint } = useContractWrite(contract, "discardComplaint")
-
+    
     const getPendingApprovals = async () => {
         try {
             const data = await calcPendingApprovalIds([]);
@@ -30,6 +33,7 @@ const Getter = () => {
         try {
             const data = await calcPendingResolutionIds([]);
             console.info("contract call successs", data);
+            console.info("contract call successs", data);
         } catch (err) {
             console.error("contract call failure", err);
         }
@@ -37,7 +41,7 @@ const Getter = () => {
 
     const handleApproveComplaint = async () => {
         try {
-            const data = await approveComplaint([id, aRemark]);
+            const data = await approveComplaint([_id, _aRemark]);
             console.info("contract call successs", data);
         } catch (err) {
             console.error("contract call failure", err);
@@ -46,7 +50,7 @@ const Getter = () => {
 
     const handleDeclineComplaint = async () => {
         try {
-            const data = await discardComplaint([id, aRemark]);
+            const data = await discardComplaint([_id, _aRemark]);
             console.info("contract call successs", data);
         } catch (err) {
             console.error("contract call failure", err);
@@ -55,7 +59,7 @@ const Getter = () => {
 
     const handleResolveComplaint = async () => {
         try {
-            const data = await resolveComplaint([rId, rRemark]);
+            const data = await resolveComplaint([_rId, _rRemark]);
             console.info("contract call successs", data);
         } catch (err) {
             console.error("contract call failure", err);

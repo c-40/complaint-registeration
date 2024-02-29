@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { useContract, useContractRead } from "@thirdweb-dev/react";
-
+// import complaint from './contracts/Complaint.json';
+// import contract from './components/contract';
 const Status = () => {
     const [id, setId] = useState(0);
     const { contract } = useContract(process.env.NEXT_PUBLIC_SMART_CONTRACT);
+    // const { contract } = useContract("0x28a7f19059CFbC7f9b3d3Dc459Dd5797CaB7e207");
     const { data: Complaints } = useContractRead(contract, "Complaints", id)
     return (
         <div className='status-container'>
