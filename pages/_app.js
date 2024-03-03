@@ -24,6 +24,7 @@ function MyApp({ Component, pageProps }) {
     <ThirdwebProvider
        activeChain="mumbai"
       // activeChain={ethereum}
+  
       clientId="42babf76b197aeb52e978639713cfc5b" // Replace "YOUR_CLIENT_ID" with your actual client ID
     >
       <Component {...pageProps} />
